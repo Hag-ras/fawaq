@@ -1,0 +1,72 @@
+# =========================
+# Miscellaneous / OS
+# =========================
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDEs
+# =========================
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# =========================
+# Flutter / Dart
+# =========================
+.dart_tool/
+.packages
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+build/
+coverage/
+
+# =========================
+# Android
+# =========================
+android/.gradle/
+android/build/
+android/app/build/
+android/captures/
+android/local.properties
+
+# Android build variants
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# =========================
+# Android signing
+# =========================
+*.jks
+*.keystore
+
+# =========================
+# iOS (unused but safe)
+# =========================
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/.last_build_id
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/build/
+
+# =========================
+# Docs & tools
+# =========================
+**/doc/api/
+
+# =========================
+# Env / Secrets
+# =========================
+.env
+.env.*
