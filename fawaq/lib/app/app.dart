@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../ui/theme/app_theme.dart';
 
 class FawaqApp extends StatelessWidget {
   const FawaqApp({super.key});
@@ -6,15 +7,11 @@ class FawaqApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fawaq',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
+      theme: AppTheme.dark(),
       home: const Scaffold(
         body: Center(
-          child: Text(
-            'Fawaq',
-            style: TextStyle(fontSize: 24),
-          ),
+          child: Text('Fawaq'),
         ),
       ),
     );
