@@ -18,29 +18,29 @@ Thumbs.db
 .vscode/
 
 # =========================
-# Flutter / Dart
+# Flutter / Dart (inside fawaq/)
 # =========================
-.dart_tool/
-.packages
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-build/
-coverage/
+fawaq/.dart_tool/
+fawaq/.packages
+fawaq/.flutter-plugins-dependencies
+fawaq/.pub-cache/
+fawaq/.pub/
+fawaq/build/
+fawaq/coverage/
 
 # =========================
-# Android
+# Android (inside fawaq/)
 # =========================
-android/.gradle/
-android/build/
-android/app/build/
-android/captures/
-android/local.properties
+fawaq/android/.gradle/
+fawaq/android/build/
+fawaq/android/app/build/
+fawaq/android/captures/
+fawaq/android/local.properties
 
 # Android build variants
-/android/app/debug
-/android/app/profile
-/android/app/release
+fawaq/android/app/debug/
+fawaq/android/app/profile/
+fawaq/android/app/release/
 
 # =========================
 # Android signing
@@ -51,14 +51,14 @@ android/local.properties
 # =========================
 # iOS (unused but safe)
 # =========================
-ios/Pods/
-ios/.symlinks/
-ios/Flutter/.last_build_id
-ios/Flutter/Flutter.framework
-ios/Flutter/Flutter.podspec
-ios/Flutter/Generated.xcconfig
-ios/Flutter/ephemeral/
-ios/build/
+fawaq/ios/Pods/
+fawaq/ios/.symlinks/
+fawaq/ios/Flutter/.last_build_id
+fawaq/ios/Flutter/Flutter.framework
+fawaq/ios/Flutter/Flutter.podspec
+fawaq/ios/Flutter/Generated.xcconfig
+fawaq/ios/Flutter/ephemeral/
+fawaq/ios/build/
 
 # =========================
 # Docs & tools
