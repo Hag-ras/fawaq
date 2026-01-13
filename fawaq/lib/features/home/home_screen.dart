@@ -4,6 +4,7 @@ import '../../ui/components/app_scaffold.dart';
 import '../../ui/components/mode_card.dart';
 import '../../ui/tokens/colors.dart';
 import '../../ui/tokens/spacing.dart';
+import '../metro/metro_setup_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,7 +24,13 @@ class HomeScreen extends StatelessWidget {
               backgroundColor: AppColors.primary,
               iconBackgroundColor: Colors.white.withOpacity(0.2),
               iconColor: Colors.white,
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const MetroSetupScreen(),
+                  ),
+                );
+              },
             ),
           ),
           SizedBox(height: AppSpacing.lg),
