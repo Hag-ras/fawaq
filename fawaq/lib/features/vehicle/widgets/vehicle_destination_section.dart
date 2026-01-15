@@ -3,12 +3,12 @@ import '../../../ui/tokens/colors.dart';
 import '../../../ui/tokens/spacing.dart';
 import '../../../ui/tokens/radius.dart';
 
-class MetroDestinationSection extends StatelessWidget {
-  final String stationName;
+class VehicleDestinationSection extends StatelessWidget {
+  final String placeName;
 
-  const MetroDestinationSection({
+  const VehicleDestinationSection({
     super.key,
-    required this.stationName,
+    required this.placeName,
   });
 
   @override
@@ -35,14 +35,14 @@ class MetroDestinationSection extends StatelessWidget {
           Row(
             children: [
               Icon(
-                Icons.location_on,
+                Icons.place,
                 color: AppColors.primary,
                 size: 24,
               ),
               SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: Text(
-                  stationName,
+                  placeName,
                   style: TextStyle(
                     color: AppColors.textPrimaryDark,
                     fontSize: 20,

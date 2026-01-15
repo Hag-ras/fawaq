@@ -1,48 +1,24 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import '../../../ui/tokens/colors.dart';
 import '../../../ui/tokens/spacing.dart';
+import '../../../ui/tokens/radius.dart';
 
 class MetroAlertTimingSection extends StatefulWidget {
   const MetroAlertTimingSection({super.key});
 
   @override
-  State<MetroAlertTimingSection> createState() =>
-      _MetroAlertTimingSectionState();
+  State<MetroAlertTimingSection> createState() => _MetroAlertTimingSectionState();
 }
 
 class _MetroAlertTimingSectionState extends State<MetroAlertTimingSection> {
-  int _selectedStations = 1;
-  bool _isCustom = false;
+  int selectedOption = 1;
+  final TextEditingController customStationsController = TextEditingController();
 
-  final TextEditingController _controller =
-      TextEditingController(text: '3');
-
-  static const int _minStations = 1;
-  static const int _maxStations = 6;
-
-  void _selectPreset(int value) {
-    setState(() {
-      _isCustom = false;
-      _selectedStations = value;
-    });
-  }
-
-  void _selectCustom() {
-    setState(() {
-      _isCustom = true;
-      _selectedStations = int.tryParse(_controller.text) ?? _minStations;
-    });
-  }
-
-  void _onCustomChanged(String value) {
-    final parsed = int.tryParse(value);
-    if (parsed == null) return;
-
-    final clamped = parsed.clamp(_minStations, _maxStations);
-    setState(() {
-      _selectedStations = clamped;
-    });
+  @override
+  void dispose() {
+    customStationsController.dispose();
+    super.dispose();
   }
 
   @override
@@ -50,78 +26,67 @@ class _MetroAlertTimingSectionState extends State<MetroAlertTimingSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'WAKE ME UP',
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: AppColors.textSecondaryDark,
-                letterSpacing: 2,
-              ),
+        Padding(
+          padding: EdgeInsets.only(bottom: AppSpacing.md),
+          child: Text(
+            'WAKE ME UP',
+            style: TextStyle(
+              color: AppColors.textSecondaryDark,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 1.2,
+            ),
+          ),
         ),
-        SizedBox(height: AppSpacing.md),
-
-        _OptionCard(
+        _buildTimingOption(
+          optionNumber: 1,
           label: 'Before 1 station',
-          selected: !_isCustom && _selectedStations == 1,
-          onTap: () => _selectPreset(1),
         ),
-
-        _OptionCard(
+        SizedBox(height: AppSpacing.sm),
+        _buildTimingOption(
+          optionNumber: 2,
           label: 'Before 2 stations',
-          selected: !_isCustom && _selectedStations == 2,
-          onTap: () => _selectPreset(2),
         ),
-
-        _CustomOptionCard(
-          controller: _controller,
-          selected: _isCustom,
-          min: _minStations,
-          max: _maxStations,
-          onTap: _selectCustom,
-          onChanged: _onCustomChanged,
-        ),
+        SizedBox(height: AppSpacing.sm),
+        _buildCustomTimingOption(),
       ],
     );
   }
-}
 
-class _OptionCard extends StatelessWidget {
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
+  Widget _buildTimingOption({
+    required int optionNumber,
+    required String label,
+  }) {
+    final isSelected = selectedOption == optionNumber;
 
-  const _OptionCard({
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        setState(() {
+          selectedOption = optionNumber;
+        });
+      },
       child: Container(
-        margin: EdgeInsets.only(bottom: AppSpacing.sm),
         padding: EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surfaceDark,
-          borderRadius: BorderRadius.circular(12),
+          color: isSelected ? AppColors.primary : AppColors.surfaceDark,
+          borderRadius: BorderRadius.circular(AppRadius.md),
           border: Border.all(
-            color: selected ? AppColors.primary : AppColors.borderDark,
+            color: isSelected ? AppColors.primary : Colors.transparent,
+            width: 2,
           ),
         ),
         child: Row(
           children: [
             Icon(
-              selected
-                  ? Icons.radio_button_checked
-                  : Icons.radio_button_off,
-              color: AppColors.primary,
+              isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+              color: isSelected ? Colors.white : AppColors.textSecondaryDark,
             ),
             SizedBox(width: AppSpacing.md),
             Text(
               label,
               style: TextStyle(
-                color: AppColors.textPrimaryDark,
+                color: isSelected ? Colors.white : AppColors.textPrimaryDark,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -130,98 +95,76 @@ class _OptionCard extends StatelessWidget {
       ),
     );
   }
-}
 
-class _CustomOptionCard extends StatelessWidget {
-  final TextEditingController controller;
-  final bool selected;
-  final int min;
-  final int max;
-  final VoidCallback onTap;
-  final ValueChanged<String> onChanged;
+  Widget _buildCustomTimingOption() {
+    final isSelected = selectedOption == 3;
 
-  const _CustomOptionCard({
-    required this.controller,
-    required this.selected,
-    required this.min,
-    required this.max,
-    required this.onTap,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        setState(() {
+          selectedOption = 3;
+        });
+      },
       child: Container(
         padding: EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surfaceDark,
-          borderRadius: BorderRadius.circular(12),
+          color: isSelected ? AppColors.primary : AppColors.surfaceDark,
+          borderRadius: BorderRadius.circular(AppRadius.md),
           border: Border.all(
-            color: selected ? AppColors.primary : AppColors.borderDark,
+            color: isSelected ? AppColors.primary : Colors.transparent,
+            width: 2,
           ),
         ),
         child: Row(
           children: [
             Icon(
-              selected
-                  ? Icons.radio_button_checked
-                  : Icons.radio_button_off,
-              color: AppColors.primary,
+              isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+              color: isSelected ? Colors.white : AppColors.textSecondaryDark,
             ),
             SizedBox(width: AppSpacing.md),
-            const Text(
+            Text(
               'Before',
               style: TextStyle(
-                color: AppColors.textPrimaryDark,
+                color: isSelected ? Colors.white : AppColors.textPrimaryDark,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
             ),
             SizedBox(width: AppSpacing.sm),
             SizedBox(
-              width: 48,
+              width: 60,
               child: TextField(
-                controller: controller,
-                enabled: selected,
+                controller: customStationsController,
+                enabled: isSelected,
                 keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: AppColors.textPrimaryDark,
-                  fontWeight: FontWeight.w700,
+                style: TextStyle(
+                  color: isSelected ? Colors.white : AppColors.textSecondaryDark,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
                 decoration: InputDecoration(
-                  isDense: true,
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 8),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.borderDark,
-                    ),
+                  hintText: '3',
+                  hintStyle: TextStyle(
+                    color: isSelected 
+                        ? Colors.white.withOpacity(0.5)
+                        : AppColors.textSecondaryDark.withOpacity(0.5),
                   ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.primary,
-                    ),
-                  ),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.zero,
                 ),
-                onChanged: onChanged,
               ),
             ),
             SizedBox(width: AppSpacing.sm),
             Text(
               'stations',
               style: TextStyle(
-                color: AppColors.textPrimaryDark,
+                color: isSelected ? Colors.white : AppColors.textPrimaryDark,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
-              ),
-            ),
-            const Spacer(),
-            Text(
-              '$min–$max',
-              style: TextStyle(
-                color: AppColors.textSecondaryDark,
-                fontSize: 12,
               ),
             ),
           ],

@@ -5,8 +5,8 @@ import '../features/home/home_screen.dart';
 import '../features/metro/metro_setup_screen.dart';
 import '../features/metro/metro_active_screen.dart';
 
-// import '../features/vehicle/vehicle_setup_screen.dart';
-// import '../features/vehicle/vehicle_active_screen.dart';
+import '../features/vehicle/vehicle_setup_screen.dart';
+import '../features/vehicle/vehicle_active_screen.dart';
 
 abstract class AppRoutes {
   static const home = '/';
@@ -14,8 +14,8 @@ abstract class AppRoutes {
   static const metroSetup = '/metro/setup';
   static const metroActive = '/metro/active';
 
-//   static const vehicleSetup = '/vehicle/setup';
-//   static const vehicleActive = '/vehicle/active';
+  static const vehicleSetup = '/vehicle/setup';
+  static const vehicleActive = '/vehicle/active';
 }
 
 class AppRouter {
@@ -30,11 +30,11 @@ class AppRouter {
       case AppRoutes.metroActive:
         return _page(const MetroActiveScreen());
 
-    //   case AppRoutes.vehicleSetup:
-    //     return _page(const VehicleSetupScreen());
+      case AppRoutes.vehicleSetup:
+        return _page(const VehicleSetupScreen());
 
-    //   case AppRoutes.vehicleActive:
-    //     return _page(const VehicleActiveScreen());
+      case AppRoutes.vehicleActive:
+        return _page(const VehicleActiveScreen());
 
       default:
         return _page(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'router.dart';
 import '../ui/theme/app_theme.dart';
+import 'router.dart';
 
 class FawaqApp extends StatelessWidget {
   const FawaqApp({super.key});
@@ -9,10 +8,11 @@ class FawaqApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'FAWAQ',
+      theme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.dark(),
+      initialRoute: '/',
       onGenerateRoute: AppRouter.onGenerateRoute,
-      initialRoute: AppRoutes.home,
     );
   }
 }

@@ -20,12 +20,18 @@ class AppScaffold extends StatelessWidget {
       backgroundColor: AppColors.backgroundDark,
       appBar: appBar,
       body: SafeArea(
-        child: Padding(
-          padding: AppSpacing.screen,
-          child: body,
+        child: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: AppSpacing.screen,
+                child: body,
+              ),
+            ),
+            if (bottom != null) bottom!,
+          ],
         ),
       ),
-      bottomNavigationBar: bottom,
     );
   }
 }

@@ -3,8 +3,8 @@ import '../../../ui/tokens/colors.dart';
 import '../../../ui/tokens/spacing.dart';
 import '../../../ui/tokens/radius.dart';
 
-class MetroStatusIndicator extends StatelessWidget {
-  const MetroStatusIndicator({super.key});
+class VehicleStatusIndicator extends StatelessWidget {
+  const VehicleStatusIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {

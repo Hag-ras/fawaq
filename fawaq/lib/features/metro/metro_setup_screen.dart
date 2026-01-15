@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../../ui/components/app_scaffold.dart';
 import '../../ui/components/primary_button.dart';
 import '../../ui/tokens/spacing.dart';
-
+import 'widgets/metro_back_button.dart';
 import 'widgets/metro_destination_section.dart';
 import 'widgets/metro_alert_timing_section.dart';
 
@@ -13,48 +12,31 @@ class MetroSetupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: const MetroBackButton(),
+        automaticallyImplyLeading: false,
+      ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const _Header(),
-          SizedBox(height: AppSpacing.xl),
-          const MetroDestinationSection(),
-          SizedBox(height: AppSpacing.xl),
-          const MetroAlertTimingSection(),
-          const Spacer(),
-          PrimaryButton(
-            label: 'START TRIP',
-            onPressed: () {
-              Navigator.pushNamed(context, '/metro/active');
-            },
+          const MetroDestinationSection(
+            stationName: 'Select Station',
           ),
+          SizedBox(height: AppSpacing.lg),
+          const MetroAlertTimingSection(),
         ],
       ),
-    );
-  }
-}
-
-class _Header extends StatelessWidget {
-  const _Header();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios),
+      bottom: Padding(
+        padding: EdgeInsets.all(AppSpacing.md),
+        child: PrimaryButton(
+          label: 'START TRIP',
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/metro/active');
+          },
         ),
-        const Spacer(),
-        const Text(
-          'Metro Mode',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const Spacer(flex: 2),
-      ],
+      ),
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
 import '../../ui/components/app_scaffold.dart';
+import '../../ui/components/primary_button.dart';
+import '../../ui/tokens/colors.dart';
 import '../../ui/tokens/spacing.dart';
-
+import 'widgets/metro_status_indicator.dart';
 import 'widgets/metro_destination_section.dart';
 import 'widgets/metro_distance_card.dart';
-import 'widgets/metro_status_indicator.dart';
 
 class MetroActiveScreen extends StatelessWidget {
   const MetroActiveScreen({super.key});
@@ -14,29 +14,32 @@ class MetroActiveScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const MetroStatusIndicator(),
-          SizedBox(height: AppSpacing.xl),
-          const MetroDestinationSection(),
-          SizedBox(height: AppSpacing.xl),
-          const MetroDistanceCard(),
-          const Spacer(),
-          _StopTripButton(),
+          SizedBox(height: AppSpacing.lg),
+          const MetroDestinationSection(
+            stationName: 'Heliopolis',
+          ),
+          SizedBox(height: AppSpacing.lg),
+          const MetroDistanceCard(
+            stationsRemaining: 3,
+          ),
         ],
       ),
-    );
-  }
-}
-
-class _StopTripButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 56,
-      child: ElevatedButton(
-        onPressed: () => Navigator.pop(context),
-        child: const Text('STOP TRIP'),
+      bottom: Padding(
+        padding: EdgeInsets.all(AppSpacing.md),
+        child: PrimaryButton(
+          label: 'STOP TRIP',
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              '/',
+              (route) => false,
+            );
+          },
+          backgroundColor: AppColors.danger,
+        ),
       ),
     );
   }

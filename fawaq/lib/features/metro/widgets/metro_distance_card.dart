@@ -1,43 +1,51 @@
 import 'package:flutter/material.dart';
 import '../../../ui/tokens/colors.dart';
 import '../../../ui/tokens/spacing.dart';
+import '../../../ui/tokens/radius.dart';
 
 class MetroDistanceCard extends StatelessWidget {
-  const MetroDistanceCard({super.key});
+  final int stationsRemaining;
+
+  const MetroDistanceCard({
+    super.key,
+    required this.stationsRemaining,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(AppSpacing.lg),
+      padding: EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
         color: AppColors.surfaceDark,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
       ),
       child: Column(
         children: [
           Text(
-            'DISTANCE REMAINING',
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: AppColors.textSecondaryDark,
-                  letterSpacing: 2,
-                ),
+            'STATIONS REMAINING',
+            style: TextStyle(
+              color: AppColors.textSecondaryDark,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 1.2,
+            ),
           ),
           SizedBox(height: AppSpacing.md),
-          RichText(
-            text: TextSpan(
-              text: '1.2 ',
-              style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                    color: AppColors.textPrimaryDark,
-                    fontWeight: FontWeight.bold,
-                  ),
-              children: [
-                TextSpan(
-                  text: 'km',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColors.primary,
-                      ),
-                ),
-              ],
+          Text(
+            '$stationsRemaining',
+            style: TextStyle(
+              color: AppColors.primary,
+              fontSize: 64,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: AppSpacing.sm),
+          Text(
+            stationsRemaining == 1 ? 'station' : 'stations',
+            style: TextStyle(
+              color: AppColors.textPrimaryDark,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

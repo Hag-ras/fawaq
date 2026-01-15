@@ -7,9 +7,11 @@ class MetroBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () => Navigator.pop(context),
-      icon: const Icon(Icons.arrow_back_ios),
+      icon: const Icon(Icons.arrow_back),
       color: AppColors.textPrimaryDark,
+      onPressed: () {
+        Navigator.pop(context);
+      },
     );
   }
 }

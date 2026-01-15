@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../../ui/components/app_scaffold.dart';
 import '../../ui/components/mode_card.dart';
-import '../../ui/tokens/colors.dart';
 import '../../ui/tokens/spacing.dart';
-import '../metro/metro_setup_screen.dart';
+import '../../ui/tokens/colors.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,38 +11,42 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: double.infinity,
-            child: ModeCard(
-              icon: Icons.subway,
-              title: 'Metro Mode',
-              subtitle: 'Station-based alarms',
-              backgroundColor: AppColors.primary,
-              iconBackgroundColor: Colors.white.withOpacity(0.2),
-              iconColor: Colors.white,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const MetroSetupScreen(),
-                  ),
-                );
-              },
+          Text(
+            'FAWAQ',
+            style: TextStyle(
+              color: AppColors.primary,
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2,
             ),
           ),
-          SizedBox(height: AppSpacing.lg),
-          SizedBox(
-            width: double.infinity,
-            child: ModeCard(
-              icon: Icons.directions_bus,
-              title: 'Vehicle Mode',
-              subtitle: 'GPS distance alarms',
-              backgroundColor: AppColors.surfaceDark,
-              iconBackgroundColor: AppColors.primary.withOpacity(0.15),
-              iconColor: AppColors.primary,
-              onTap: () {},
+          SizedBox(height: AppSpacing.xs),
+          Text(
+            'Choose your commute mode',
+            style: TextStyle(
+              color: AppColors.textSecondaryDark,
+              fontSize: 16,
             ),
+          ),
+          SizedBox(height: AppSpacing.xl),
+          ModeCard(
+            icon: Icons.train,
+            title: 'Metro',
+            description: 'Wake me before my station',
+            onTap: () {
+              Navigator.pushNamed(context, '/metro/setup');
+            },
+          ),
+          SizedBox(height: AppSpacing.md),
+          ModeCard(
+            icon: Icons.directions_car,
+            title: 'Vehicle',
+            description: 'Wake me before my destination',
+            onTap: () {
+              Navigator.pushNamed(context, '/vehicle/setup');
+            },
           ),
         ],
       ),

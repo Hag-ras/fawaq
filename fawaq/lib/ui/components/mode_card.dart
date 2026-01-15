@@ -2,66 +2,78 @@ import 'package:flutter/material.dart';
 import '../tokens/colors.dart';
 import '../tokens/spacing.dart';
 import '../tokens/radius.dart';
-import '../tokens/typography.dart';
 
 class ModeCard extends StatelessWidget {
   final IconData icon;
   final String title;
-  final String subtitle;
-  final Color backgroundColor;
-  final Color iconBackgroundColor;
-  final Color iconColor;
+  final String description;
   final VoidCallback onTap;
 
   const ModeCard({
     super.key,
     required this.icon,
     required this.title,
-    required this.subtitle,
-    required this.backgroundColor,
-    required this.iconBackgroundColor,
-    required this.iconColor,
+    required this.description,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 120),
-        padding: const EdgeInsets.all(AppSpacing.lg),
+      borderRadius: BorderRadius.circular(AppRadius.lg),
+      child: Container(
+        padding: EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: AppRadius.xlRadius,
+          color: AppColors.surfaceDark,
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          border: Border.all(
+            color: AppColors.primary.withOpacity(0.3),
+            width: 1,
+          ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(AppSpacing.md),
+              padding: EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
-                color: iconBackgroundColor,
-                shape: BoxShape.circle,
+                color: AppColors.primary.withOpacity(0.15),
+                borderRadius: BorderRadius.circular(AppRadius.md),
               ),
               child: Icon(
                 icon,
-                size: 48,
-                color: iconColor,
+                color: AppColors.primary,
+                size: 32,
               ),
             ),
-            const SizedBox(height: AppSpacing.lg),
-            Text(
-              title,
-              style: AppText.h2.copyWith(color: AppColors.textPrimaryDark),
-              textAlign: TextAlign.center,
+            SizedBox(width: AppSpacing.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      color: AppColors.textPrimaryDark,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: AppSpacing.xs),
+                  Text(
+                    description,
+                    style: TextStyle(
+                      color: AppColors.textSecondaryDark,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: AppSpacing.sm),
-            Text(
-              subtitle,
-              style:
-                  AppText.body.copyWith(color: AppColors.textSecondaryDark),
-              textAlign: TextAlign.center,
+            Icon(
+              Icons.arrow_forward_ios,
+              color: AppColors.textSecondaryDark,
+              size: 20,
             ),
           ],
         ),
